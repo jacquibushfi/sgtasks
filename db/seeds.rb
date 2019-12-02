@@ -1,0 +1,13 @@
+user = User.create(name: "Angela", email: "angela@sgm.com", password: "Angela")
+user.tasks.create(date_worked: "11/1/19", task: "Puttying", project_title: "Holy Name School", hrs_worked: 2.5)
+user.tasks.create(date_worked: "11/1/19", task: "Whiting", project_title: "Holy Name School", hrs_worked: 1)
+user.tasks.create(date_worked: "11/1/19", task: "Picking", project_title: "Holy Name School", hrs_worked: 3)
+user.tasks.create(date_worked: "11/4/19", task: "Puttying", project_title: "Sharla Bush", hrs_worked: 4)
+user.tasks.create(date_worked: "11/5/19", task: "Whiting", project_title: "Sharla Bush", hrs_worked: 2)
+user.tasks.create(date_worked: "11/6/19", task: "Picking", project_title: "Sharla Bush", hrs_worked: 3)
+
+user2 = User.create(name: "Sally", email: "sally@sgm.com", password: "Sally")
+user2.tasks.create(date_worked: "11/2/19", task: "Scrubbing", project_title: "Holy Name School", hrs_worked: 3)
+user2.tasks.create(date_worked: "11/3/19", task: "Polishing", project_title: "Holy Name School", hrs_worked: 3)
+user2.tasks.create(date_worked: "11/7/19", task: "Scrubbing", project_title: "Sharla Bush", hrs_worked: 5)
+user2.tasks.create(date_worked: "11/8/19", task: "Polishing", project_title: "Sharla Bush", hrs_worked: 6)
