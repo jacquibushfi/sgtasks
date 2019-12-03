@@ -9,13 +9,18 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:password] == ""
+    if params[:name] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      @user = User.create(:name => params[:username], :password_digest => params[:password])
+      @user = User.create(:name => params[:name], :email => params[:email], :password_digest => params[:password])
       session[:user_id] = @user.id 
       redirect '/tasks'
     end
+  end
+
+  get '/logout' do
+    session.destroy
+    redirect to '/'
   end
 
 end
