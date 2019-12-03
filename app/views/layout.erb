@@ -17,13 +17,13 @@
     <nav>
       <% if logged_in? %>
       
-        <a href="/tasks/newtask"> Create Task </a>
+        <a href="/newtask"> Create Task </a>
         <a href="/logout"> Log Out </a>
         <p> Welcome, <%= current_user.name %></p>
 
       <% else %>
-        <a href="/users/signup"> Sign Up </a>
-        <a href="/sessions/login">    Log In</a>
+        <a href="/signup"> Sign Up </a>
+        <a href="/login"> Log In </a>
       <% end %>
       
       </nav>
@@ -32,7 +32,7 @@
         <%= yield %>
 
       <footer class="branding">
-        <small>&copy; 2019 <strong>Sgtasks</strong></small>
+        <small>&copy; 2019 <strong>Stained Glass Task Tracker</strong></small>
       </footer>
     </div>
 
