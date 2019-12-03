@@ -1,1 +1,11 @@
 <h2>The Tasks</h2>
+
+<%@tasks.each do |task| %>
+  <a href="/tags/<%= task.id %> /edit"> Edit</a>
+  <%= task.date_worked %>
+  <%= task.task %>
+  <%= task.hrs_worked %>
+  <%= task.project_title %>
+  
+  <br />
+  <% end %>
