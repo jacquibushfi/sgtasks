@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   post '/newtask' do   
     redirect_if_not_logged_in
     Task.create(params)
-    redirect to '/tasks'
+    redirect to "/tasks/#{Task.id}"
   end
 
   get '/tasks/:id' do
@@ -34,12 +34,14 @@ class TasksController < ApplicationController
     @task = Task.find_by_id(params[:id])
     @task.update(date_worked: params[:date_worked], task: params[:task], project_title: params[:project_title], hrs_worked: params[:hrs_worked])
     @task.save
+    erb :'tasks/show'
+  end
+
+  delete '/tasks/:id/delete' do
+    redirect_if_not_logged_in
+    @task = Task.find_by_id(params[:id])
+    @task.delete
     redirect to '/tasks'
   end
 
-  
-
-  
-
-  
 end
