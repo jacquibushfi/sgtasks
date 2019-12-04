@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
   get '/tasks' do
     redirect_if_not_logged_in
-    @tasks = Task.all 
+    @tasks = current_user.tasks
     erb :'tasks/index'
   end
 

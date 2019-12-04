@@ -17,9 +17,11 @@
     <nav>
       <% if logged_in? %>
       
-        <a href="/newtask"> Create Task </a>
-        <a href="/tasks"> Task List </a>
+        <a href="/tasks/new"> Create Task </a>
+        <a href="/tasks"> List Task </a>
         <a href="/logout"> Log Out </a>
+        </br>
+        </br>
         <p> Welcome, <%= current_user.name %></p>
 
       <% else %>
