@@ -6,22 +6,22 @@ class TasksController < ApplicationController
     erb :'tasks/index'
   end
 
-  get '/newtask' do
+  get '/tasks/new' do
     redirect_if_not_logged_in
     erb :'tasks/newtask'
   end
 
-  post '/newtask' do   
+  post '/tasks/new' do   
     redirect_if_not_logged_in
 
       if params[:task] == ""
-        redirect to "/newtask"
+        redirect to "/tasks/new"
       else
         @task = current_user.tasks.build(params)
         if @task.save
           redirect to "/tasks/#{@task.id}"
         else
-          redirect to "/newtask"
+          redirect to "/tasks/new"
         end
       end
   end
@@ -29,7 +29,11 @@ class TasksController < ApplicationController
   get '/tasks/:id' do
     redirect_if_not_logged_in
       @task = Task.find_by_id(params[:id])
-      erb :'tasks/show'
+      if @task 
+        erb :'tasks/show'
+      else
+        redirect '/tasks'
+      end
   end
 
   get '/tasks/:id/edit' do
