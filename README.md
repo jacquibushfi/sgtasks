@@ -1,1 +1,1 @@
-Stained Glass Tasks Tracker
+Stained Glass Task Tracker
