@@ -13,10 +13,11 @@ class TasksController < ApplicationController
 
   post '/newtask' do   
     redirect_if_not_logged_in
+
       if params[:task] == ""
         redirect to "/newtask"
       else
-        @task = current_user.tasks.build(date_worked: params[:date_worked], task: params[:task], project_title: params[:project_title], hrs_worked: params[:hrs_worked])
+        @task = current_user.tasks.build(params)
         if @task.save
           redirect to "/tasks/#{@task.id}"
         else
@@ -34,21 +35,37 @@ class TasksController < ApplicationController
   get '/tasks/:id/edit' do
     redirect_if_not_logged_in
     @task = Task.find_by_id(params[:id])
-    erb :'tasks/edit'
+    if @task && @task.user_id = current_user.id
+      erb :'tasks/edit'
+    else
+      redirect to '/tasks'
+    end
   end
 
   patch '/tasks/:id' do
     redirect_if_not_logged_in
-    @task = Task.find_by_id(params[:id])
-    @task.update(date_worked: params[:date_worked], task: params[:task], project_title: params[:project_title], hrs_worked: params[:hrs_worked])
-    @task.save
-    erb :'tasks/show'
+    if params[:task] == ""
+      redirect to "/tasks/#{params[:id]}/edit"
+    else
+      @task = Task.find_by_id(params[:id])
+      if @task && @task.user_id == current_user.id
+        if @task.update(date_worked: params[:date_worked], task: params[:task], project_title: params[:project_title], hrs_worked: params[:hrs_worked])
+          erb :'tasks/show'
+        else
+          redirect to "/tasks/#{params[:id]}/edit"
+        end
+      else
+        redirect to '/tasks'
+      end
+    end   
   end
 
   delete '/tasks/:id/delete' do
     redirect_if_not_logged_in
     @task = Task.find_by_id(params[:id])
-    @task.delete
+    if @task && @task.user_id == current_user.id
+      @task.delete
+    end
     redirect to '/tasks'
   end
 
