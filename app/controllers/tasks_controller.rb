@@ -11,6 +11,18 @@ class TasksController < ApplicationController
     erb :'tasks/newtask'
   end
 
+  post '/newtask' do   
+    redirect_if_not_logged_in
+    Task.create(params)
+    redirect to '/tasks'
+  end
+
+  get '/tasks/:id' do
+    redirect_if_not_logged_in
+      @task = Task.find_by_id(params[:id])
+      erb :'tasks/show'
+  end
+
   get '/tasks/:id/edit' do
     redirect_if_not_logged_in
     @task = Task.find_by_id(params[:id])
@@ -25,17 +37,9 @@ class TasksController < ApplicationController
     redirect to '/tasks'
   end
 
-  get '/tasks/:id' do
-    redirect_if_not_logged_in
-      @task = Task.find_by_id(params[:id])
-      erb :'tasks/show'
-  end
+  
 
-  post '/newtask' do   
-    redirect_if_not_logged_in
-    Task.create(params)
-    redirect to '/tasks'
-  end
+  
 
   
 end
