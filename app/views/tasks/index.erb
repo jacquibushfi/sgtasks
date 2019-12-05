@@ -1,7 +1,7 @@
 <h2>Task List</h2>
 
 <%@tasks.each do |task| %>
-  <a href="/tasks/<%=task.id %> /edit"> Edit</a>
+  <a href="/tasks/<%=task.id%>/edit"> Edit</a>
   <%= task.date_worked %>
   <%= task.task %>
   <%= task.hrs_worked %>

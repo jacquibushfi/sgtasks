@@ -28,7 +28,7 @@ class TasksController < ApplicationController
 
   get '/tasks/:id' do
     redirect_if_not_logged_in
-      @task = Task.find_by_id(params[:id])
+      @task = current_user.tasks.find_by_id(params[:id])
       if @task 
         erb :'tasks/show'
       else
@@ -38,8 +38,8 @@ class TasksController < ApplicationController
 
   get '/tasks/:id/edit' do
     redirect_if_not_logged_in
-    @task = Task.find_by_id(params[:id])
-    if @task && @task.user_id = current_user.id
+    @task = current_user.tasks.find_by_id(params[:id])
+    if @task = current_user.id
       erb :'tasks/edit'
     else
       redirect to '/tasks'
@@ -51,8 +51,8 @@ class TasksController < ApplicationController
     if params[:task] == ""
       redirect to "/tasks/#{params[:id]}/edit"
     else
-      @task = Task.find_by_id(params[:id])
-      if @task && @task.user_id == current_user.id
+      @task = current_user.tasks.find_by_id(params[:id])
+      if @task 
         if @task.update(date_worked: params[:date_worked], task: params[:task], project_title: params[:project_title], hrs_worked: params[:hrs_worked])
           erb :'tasks/show'
         else
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
 
   delete '/tasks/:id/delete' do
     redirect_if_not_logged_in
-    @task = Task.find_by_id(params[:id])
+    @task = current_user.tasks.find_by_id(params[:id])
     if @task && @task.user_id == current_user.id
       @task.delete
     end

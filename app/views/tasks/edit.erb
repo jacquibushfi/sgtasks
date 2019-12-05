@@ -1,6 +1,6 @@
 <h2>Edit Task</h2>
 
-<form action="/tasks/<%=@task.id %>" method="POST">
+<form action="/tasks/<%=@task.id%>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 <label> Date (ex. dd/mm/yyyy) </label>
 <input type="text" name="date_worked" value="<%=@task.date_worked %>"> </br>
