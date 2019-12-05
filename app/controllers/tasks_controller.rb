@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   get '/tasks/:id/edit' do
     redirect_if_not_logged_in
     @task = current_user.tasks.find_by_id(params[:id])
-    if @task = current_user.id
+    if @task 
       erb :'tasks/edit'
     else
       redirect to '/tasks'
@@ -67,7 +67,7 @@ class TasksController < ApplicationController
   delete '/tasks/:id/delete' do
     redirect_if_not_logged_in
     @task = current_user.tasks.find_by_id(params[:id])
-    if @task && @task.user_id == current_user.id
+    if @task 
       @task.delete
     end
     redirect to '/tasks'
